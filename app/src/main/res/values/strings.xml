@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SemesterProject</string>
+    <string name="title_activity_ready_map">readyMap</string>
+    <string name="title_activity_select_vehicle">select_vehicle</string>
 </resources>
