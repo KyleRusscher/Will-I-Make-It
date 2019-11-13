@@ -8,22 +8,21 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-//TODO change java version to 1.8
-public static final int selection = 1;
+
+    public static final int selection = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button x = (Button)findViewById(R.id.selectVehicle);
 
-        x.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View e) {
-                System.out.println("Button was clicked here");
-                Intent intent = new Intent(MainActivity.this, SelectVehicle.class);
-                startActivityForResult(intent, selection);
-            }
+        x.setOnClickListener(e -> {
+            System.out.println("Button was clicked here");
+            Intent intent = new Intent(MainActivity.this, SelectVehicle.class);
+            startActivityForResult(intent, selection);
         });
+
     }
 
 
