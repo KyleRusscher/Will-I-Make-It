@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.semesterproject">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,9 +12,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".select_vehicle_files.ModelSelection"
+            android:label="@string/title_activity_model_selection"
+            android:parentActivityName=".select_vehicle_files.YearSelection"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.semesterproject.select_vehicle_files.YearSelection" />
+        </activity>
+        <activity
+            android:name=".select_vehicle_files.YearSelection"
+            android:label="@string/title_activity_year_selection"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.semesterproject.MainActivity" />
+        </activity>
+        <activity
             android:name=".SelectVehicle"
             android:label="@string/title_activity_select_vehicle"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".readyMap"
             android:label="@string/title_activity_ready_map"

@@ -28,7 +28,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static com.example.semesterproject.Constants.*;
+import static com.example.semesterproject.UrlConstants.*;
 
 public class SelectVehicle extends AppCompatActivity {
 

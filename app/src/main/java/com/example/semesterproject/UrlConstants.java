@@ -1,6 +1,6 @@
 package com.example.semesterproject;
 
-public final class Constants {
+public final class UrlConstants {
     public static final String YEARS_URL = "https://www.carqueryapi.com/api/0.3/?callback=?&cmd=getYears";
 
     public static String make_url(int year){

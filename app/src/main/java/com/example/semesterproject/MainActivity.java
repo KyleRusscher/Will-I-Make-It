@@ -4,8 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
+
+import com.example.semesterproject.select_vehicle_files.YearSelection;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         x.setOnClickListener(e -> {
             System.out.println("Button was clicked here");
-            Intent intent = new Intent(MainActivity.this, SelectVehicle.class);
+            Intent intent = new Intent(MainActivity.this, YearSelection.class);
             startActivityForResult(intent, selection);
         });
 
