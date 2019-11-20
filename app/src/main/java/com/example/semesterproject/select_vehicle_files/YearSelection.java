@@ -6,10 +6,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.semesterproject.MainActivity;
 import com.example.semesterproject.R;
 import com.example.semesterproject.select_vehicle_files.dummy.YearContent;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -29,14 +26,13 @@ import okhttp3.Response;
 
 import static com.example.semesterproject.UrlConstants.YEARS_URL;
 
-public class YearSelection extends AppCompatActivity implements yearItemFragment.OnListFragmentInteractionListener {
+public class YearSelection extends AppCompatActivity implements ItemFragment.OnListFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_year_selection);
         getData(YEARS_URL);
-//        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -52,8 +48,8 @@ public class YearSelection extends AppCompatActivity implements yearItemFragment
 
     @Override
     public void onListFragmentInteraction(YearContent.YearItem item) {
-        Intent toModel = new Intent(this, ModelSelection.class);
-        toModel.putExtra("Year_Selected", item.year);
+        Intent toModel = new Intent(this, MakeSelection.class);
+        toModel.putExtra("year_selected", item.year);
         startActivity(toModel);
     }
 

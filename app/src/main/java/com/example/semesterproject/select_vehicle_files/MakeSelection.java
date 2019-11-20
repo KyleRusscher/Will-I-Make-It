@@ -14,11 +14,9 @@ import android.view.View;
 
 import com.example.semesterproject.R;
 
-public class ModelSelection extends AppCompatActivity implements ItemFragment.OnListFragmentInteractionListener {
+public class MakeSelection extends AppCompatActivity implements ItemFragment.OnListFragmentInteractionListener {
 
     String year_selected;
-    String make_selected;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +26,6 @@ public class ModelSelection extends AppCompatActivity implements ItemFragment.On
 
         Intent intent = getIntent();
         year_selected = intent.getStringExtra("year_selected");
-        make_selected = intent.getStringExtra("make_selected");
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -43,10 +40,9 @@ public class ModelSelection extends AppCompatActivity implements ItemFragment.On
 
     @Override
     public void onListFragmentInteraction(YearContent.YearItem item) {
-        Intent toModel = new Intent(this, TrimSelection.class);
+        Intent toModel = new Intent(this, ModelSelection.class);
         toModel.putExtra("year_selected", year_selected);
-        toModel.putExtra("make_selected", make_selected);
-        toModel.putExtra("model_selected", item.year);
+        toModel.putExtra("make_selected", item.year);
         startActivity(toModel);
     }
 }

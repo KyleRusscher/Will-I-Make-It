@@ -12,9 +12,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".select_vehicle_files.TrimSelection"
+            android:label="@string/title_activity_trim_selection"
+            android:parentActivityName=".select_vehicle_files.ModelSelection"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.semesterproject.select_vehicle_files.ModelSelection" />
+        </activity>
+        <activity
+            android:name=".select_vehicle_files.MakeSelection"
+            android:label="@string/title_activity_make_selection"
+            android:parentActivityName=".select_vehicle_files.ModelSelection"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.semesterproject.select_vehicle_files.ModelSelection" />
+        </activity>
+        <activity
             android:name=".select_vehicle_files.ModelSelection"
             android:label="@string/title_activity_model_selection"
-            android:parentActivityName=".select_vehicle_files.YearSelection"
+            android:parentActivityName=".select_vehicle_files.MakeSelection"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

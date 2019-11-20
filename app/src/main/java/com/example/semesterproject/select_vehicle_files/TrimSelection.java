@@ -3,6 +3,7 @@ package com.example.semesterproject.select_vehicle_files;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.semesterproject.MainActivity;
 import com.example.semesterproject.select_vehicle_files.dummy.YearContent;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -14,10 +15,11 @@ import android.view.View;
 
 import com.example.semesterproject.R;
 
-public class ModelSelection extends AppCompatActivity implements ItemFragment.OnListFragmentInteractionListener {
+public class TrimSelection extends AppCompatActivity implements ItemFragment.OnListFragmentInteractionListener {
 
     String year_selected;
     String make_selected;
+    String model_selected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +31,11 @@ public class ModelSelection extends AppCompatActivity implements ItemFragment.On
         Intent intent = getIntent();
         year_selected = intent.getStringExtra("year_selected");
         make_selected = intent.getStringExtra("make_selected");
+        model_selected = intent.getStringExtra("model_selected");
 
+        System.out.println(year_selected);
+        System.out.println(make_selected);
+        System.out.println(model_selected);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,10 +49,12 @@ public class ModelSelection extends AppCompatActivity implements ItemFragment.On
 
     @Override
     public void onListFragmentInteraction(YearContent.YearItem item) {
-        Intent toModel = new Intent(this, TrimSelection.class);
-        toModel.putExtra("year_selected", year_selected);
-        toModel.putExtra("make_selected", make_selected);
-        toModel.putExtra("model_selected", item.year);
-        startActivity(toModel);
+        Intent returnToMain = new Intent(this, MainActivity.class);
+        returnToMain.putExtra("year_selected", year_selected);
+        returnToMain.putExtra("make_selected", make_selected);
+        returnToMain.putExtra("model_selected", model_selected);
+        returnToMain.putExtra("trim_selected", item.year);
+        returnToMain.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(returnToMain);
     }
 }

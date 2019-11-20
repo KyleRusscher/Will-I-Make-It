@@ -22,7 +22,7 @@ import com.example.semesterproject.select_vehicle_files.dummy.YearContent.YearIt
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class yearItemFragment extends Fragment {
+public class ItemFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -34,13 +34,13 @@ public class yearItemFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public yearItemFragment() {
+    public ItemFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static yearItemFragment newInstance(int columnCount) {
-        yearItemFragment fragment = new yearItemFragment();
+    public static ItemFragment newInstance(int columnCount) {
+        ItemFragment fragment = new ItemFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -70,7 +70,7 @@ public class yearItemFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyyearItemRecyclerViewAdapter(YearContent.ITEMS, mListener));
+            recyclerView.setAdapter(new ItemRecyclerViewAdapter(YearContent.ITEMS, mListener));
         }
         return view;
     }

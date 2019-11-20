@@ -4,4 +4,6 @@
     <string name="title_activity_select_vehicle">select_vehicle</string>
     <string name="title_activity_year_selection">YearSelection</string>
     <string name="title_activity_model_selection">ModelSelection</string>
+    <string name="title_activity_make_selection">MakeSelection</string>
+    <string name="title_activity_trim_selection">TrimSelection</string>
 </resources>

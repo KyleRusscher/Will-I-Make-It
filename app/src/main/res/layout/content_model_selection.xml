@@ -10,7 +10,7 @@
 
     <fragment
         android:id="@+id/fragment2"
-        android:name="com.example.semesterproject.select_vehicle_files.yearItemFragment"
+        android:name="com.example.semesterproject.select_vehicle_files.ItemFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
