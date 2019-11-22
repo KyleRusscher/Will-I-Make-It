@@ -70,7 +70,8 @@ public class ItemFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new ItemRecyclerViewAdapter(YearContent.ITEMS, mListener));
+            YearSelection.adapter = new ItemRecyclerViewAdapter(YearContent.ITEMS, mListener);
+            recyclerView.setAdapter(YearSelection.adapter);
         }
         return view;
     }

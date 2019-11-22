@@ -28,6 +28,8 @@ import static com.example.semesterproject.UrlConstants.YEARS_URL;
 
 public class YearSelection extends AppCompatActivity implements ItemFragment.OnListFragmentInteractionListener {
 
+    public static ItemRecyclerViewAdapter adapter = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +87,14 @@ public class YearSelection extends AppCompatActivity implements ItemFragment.OnL
             for(int i = endYear; i >= startYear; --i){
                 YearContent.addItem(Integer.toString(i));
             }
+
+            runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() {
+                    YearSelection.adapter.notifyDataSetChanged();
+                }
+            });
 
 //            mAdapter.notifyDataSetChanged();
         }catch (JSONException err){
