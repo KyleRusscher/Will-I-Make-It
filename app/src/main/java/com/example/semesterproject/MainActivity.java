@@ -5,12 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.semesterproject.select_vehicle_files.YearSelection;
-import com.example.semesterproject.select_vehicle_files.dummy.YearContent;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,12 +20,19 @@ public class MainActivity extends AppCompatActivity {
     String year;
     String mgp;
     String capacity;
+    TextView carname;
+    TextView carTrim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button x = (Button)findViewById(R.id.selectVehicle);
+
+
+        carname = findViewById(R.id.carName);
+        carTrim = findViewById(R.id.carTrim);
+
 
         x.setOnClickListener(e -> {
             System.out.println("Button was clicked here");
@@ -49,6 +53,10 @@ public class MainActivity extends AppCompatActivity {
         year = intent.getStringExtra("year");
         mgp = intent.getStringExtra("mpg");
         capacity = intent.getStringExtra("capacity");
+
+        carname.setText(String.format("%s %s", year, name));
+        carTrim.setText(trim);
+
 
         System.out.println(capacity);
     }
