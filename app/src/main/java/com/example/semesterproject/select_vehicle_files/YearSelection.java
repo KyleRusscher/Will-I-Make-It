@@ -34,13 +34,20 @@ public class YearSelection extends AppCompatActivity implements ItemFragment.OnL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_year_selection);
-        getData(YEARS_URL);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        YearSelection.adapter.notifyDataSetChanged();
+                    }
+                });
+                System.out.println(adapter.getItemCount());
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
@@ -49,7 +56,18 @@ public class YearSelection extends AppCompatActivity implements ItemFragment.OnL
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        YearContent.clearItems();
+        adapter.notifyDataSetChanged();
+        getData(YEARS_URL);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
     public void onListFragmentInteraction(YearContent.YearItem item) {
+        YearContent.clearItems();
+        adapter.notifyDataSetChanged();
         Intent toModel = new Intent(this, MakeSelection.class);
         toModel.putExtra("year_selected", item.year);
         startActivity(toModel);
@@ -95,8 +113,7 @@ public class YearSelection extends AppCompatActivity implements ItemFragment.OnL
                     YearSelection.adapter.notifyDataSetChanged();
                 }
             });
-
-//            mAdapter.notifyDataSetChanged();
+            
         }catch (JSONException err){
             System.out.println("err");
         }

@@ -53,7 +53,7 @@ public class SelectVehicle extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 int year_selected = (int) adapterView.getItemAtPosition(position);
-                populateSpinners(make_url(year_selected), make_spinner);
+//                populateSpinners(make_url(year_selected), make_spinner);
 
             }
 

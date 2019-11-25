@@ -1,5 +1,7 @@
 package com.example.semesterproject.select_vehicle_files.dummy;
 
+import com.example.semesterproject.select_vehicle_files.YearSelection;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -30,6 +32,11 @@ public class YearContent {
         for (int i = Calendar.getInstance().get(Calendar.YEAR); i >= 1950; i--) {
             //addItem(createDummyItem(i));
         }
+    }
+
+    public static void clearItems(){
+        ITEMS.clear();
+        ITEM_MAP.clear();
     }
 
     public static void addItem(String item) {
