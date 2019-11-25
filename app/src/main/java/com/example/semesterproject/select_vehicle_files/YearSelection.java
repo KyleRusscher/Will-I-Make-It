@@ -58,8 +58,8 @@ public class YearSelection extends AppCompatActivity implements ItemFragment.OnL
     @Override
     protected void onResume() {
         super.onResume();
-        YearContent.clearItems();
-        adapter.notifyDataSetChanged();
+//        YearContent.clearItems();
+//        adapter.notifyDataSetChanged();
         getData(YEARS_URL);
         adapter.notifyDataSetChanged();
     }
@@ -71,6 +71,7 @@ public class YearSelection extends AppCompatActivity implements ItemFragment.OnL
         Intent toModel = new Intent(this, MakeSelection.class);
         toModel.putExtra("year_selected", item.year);
         startActivity(toModel);
+        finish();
     }
 
 
@@ -96,6 +97,7 @@ public class YearSelection extends AppCompatActivity implements ItemFragment.OnL
     }
 
     public void populateModel(String response){
+        YearContent.clearItems();
         try {
 
             String str = response.substring(2, response.length() - 2);

@@ -18,7 +18,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.semesterproject.select_vehicle_files.ModelSelection" />
+                android:value="com.example.semesterproject.MainActivity" />
         </activity>
         <activity
             android:name=".select_vehicle_files.MakeSelection"
@@ -27,7 +27,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.semesterproject.select_vehicle_files.ModelSelection" />
+                android:value="com.example.semesterproject.MainActivity" />
         </activity>
         <activity
             android:name=".select_vehicle_files.ModelSelection"
@@ -36,7 +36,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.semesterproject.select_vehicle_files.YearSelection" />
+                android:value="com.example.semesterproject.MainActivity" />
         </activity>
         <activity
             android:name=".select_vehicle_files.YearSelection"

@@ -65,6 +65,7 @@ public class ModelSelection extends AppCompatActivity implements ItemFragment.On
         toModel.putExtra("make_selected", make_selected);
         toModel.putExtra("model_selected", item.year);
         startActivity(toModel);
+        finish();
     }
 
     private void getModels(String url){

@@ -61,6 +61,7 @@ public class MakeSelection extends AppCompatActivity implements ItemFragment.OnL
         toModel.putExtra("year_selected", year_selected);
         toModel.putExtra("make_selected", item.year);
         startActivity(toModel);
+        finish();
     }
 
     private void getMakes(String url){

@@ -70,7 +70,6 @@ public class TrimSelection extends AppCompatActivity implements ItemFragment.OnL
         returnToMain.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         submit(returnToMain, UrlConstants.sumbit_url(trimToId.get(item.year)));
 
-//        startActivity(returnToMain);
     }
 
     private void submit(Intent returnToMain, String url){
@@ -81,7 +80,20 @@ public class TrimSelection extends AppCompatActivity implements ItemFragment.OnL
                 if (response.isSuccessful()) {
                     String responses = response.body().string();
                     String str = responses.substring(2, responses.length() - 2);
-                    returnToMain.putExtra("data", str);
+                    System.out.println(str);
+//                    returnToMain.putExtra("data", str);
+                    try {
+                        JSONArray obj = new JSONArray(str);
+                        JSONObject dataOBJ = obj.getJSONObject(0);
+                        returnToMain.putExtra("make_id", dataOBJ.getString("model_make_id"));
+                        returnToMain.putExtra("name", dataOBJ.getString("model_name"));
+                        returnToMain.putExtra("trim", dataOBJ.getString("model_trim"));
+                        returnToMain.putExtra("year", dataOBJ.getString("model_year"));
+                        returnToMain.putExtra("mpg", dataOBJ.getString("model_mpg_hwy"));
+                        returnToMain.putExtra("capacity", dataOBJ.getString("model_fuel_cap_g"));
+                    } catch (JSONException e) {
+                        System.out.println(e);
+                    }
                     startActivity(returnToMain);
                 } else {
                     System.out.println("inside else");

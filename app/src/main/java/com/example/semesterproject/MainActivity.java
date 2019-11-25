@@ -9,13 +9,20 @@ import android.widget.Button;
 import com.example.semesterproject.select_vehicle_files.YearSelection;
 import com.example.semesterproject.select_vehicle_files.dummy.YearContent;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final int selection = 1;
 
-    String data;
+    String make;
+    String name;
+    String trim;
+    String year;
+    String mgp;
+    String capacity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,9 +40,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        System.out.println("ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ONE ");
         Intent intent = getIntent();
-        data = intent.getStringExtra("data");
-        System.out.println(data);
+        String data = intent.getStringExtra("data");
+        make = intent.getStringExtra("make_id");
+        name = intent.getStringExtra("name");
+        trim = intent.getStringExtra("trim");
+        year = intent.getStringExtra("year");
+        mgp = intent.getStringExtra("mpg");
+        capacity = intent.getStringExtra("capacity");
+
+        System.out.println(capacity);
     }
 }
