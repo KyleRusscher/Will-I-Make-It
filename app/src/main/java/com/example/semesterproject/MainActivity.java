@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int selection = 1;
 
+    String data;
     String make;
     String name;
     String trim;
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Intent intent = getIntent();
-        String data = intent.getStringExtra("data");
+        data = intent.getStringExtra("data");
         make = intent.getStringExtra("make_id");
         name = intent.getStringExtra("name");
         trim = intent.getStringExtra("trim");

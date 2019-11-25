@@ -85,6 +85,7 @@ public class TrimSelection extends AppCompatActivity implements ItemFragment.OnL
                     try {
                         JSONArray obj = new JSONArray(str);
                         JSONObject dataOBJ = obj.getJSONObject(0);
+                        returnToMain.putExtra("data", str);
                         returnToMain.putExtra("make_id", dataOBJ.getString("model_make_id"));
                         returnToMain.putExtra("name", dataOBJ.getString("model_name"));
                         returnToMain.putExtra("trim", dataOBJ.getString("model_trim"));
