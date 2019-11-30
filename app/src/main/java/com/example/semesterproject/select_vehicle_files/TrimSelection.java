@@ -35,6 +35,7 @@ public class TrimSelection extends AppCompatActivity implements ItemFragment.OnL
     String year_selected;
     String make_selected;
     String model_selected;
+    String mpg;
 
     HashMap<String, String> trimToId = new HashMap<>();
 
@@ -72,6 +73,7 @@ public class TrimSelection extends AppCompatActivity implements ItemFragment.OnL
 
     }
 
+
     private void submit(Intent returnToMain, String url){
         OkHttpClient client = new OkHttpClient();
         get(url, client, new Callback() {
@@ -92,6 +94,7 @@ public class TrimSelection extends AppCompatActivity implements ItemFragment.OnL
                         returnToMain.putExtra("year", dataOBJ.getString("model_year"));
                         returnToMain.putExtra("mpg", dataOBJ.getString("model_mpg_hwy"));
                         returnToMain.putExtra("capacity", dataOBJ.getString("model_fuel_cap_g"));
+
                     } catch (JSONException e) {
                         System.out.println(e);
                     }
