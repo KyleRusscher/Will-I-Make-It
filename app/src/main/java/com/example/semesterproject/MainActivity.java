@@ -75,6 +75,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        y.setOnClickListener(e -> {
+            System.out.println("Button was clicked for map");
+            Intent intent = new Intent(MainActivity.this, readyMap.class);
+            intent.putExtra("currLat", currLat);
+            intent.putExtra("currLon", currLon);
+            intent.putExtra("destLat", destLat);
+            intent.putExtra("destLon", destLon);
+            startActivityForResult(intent, selection);
+        });
+
         gasBar = (SeekBar) findViewById(R.id.seekBar);
         ValueText = (TextView) findViewById(R.id.ValueText);
         gasBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -84,15 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 ValueText.setText(String.valueOf(progress));
 
                 if(progress > 50){
-                    y.setOnClickListener(e -> {
-                        System.out.println("Button was clicked for map");
-                        Intent intent = new Intent(MainActivity.this, readyMap.class);
-                        intent.putExtra("currLat", currLat);
-                        intent.putExtra("currLon", currLon);
-                        intent.putExtra("destLat", destLat);
-                        intent.putExtra("destLon", destLon);
-                        startActivityForResult(intent, selection);
-                    });
+
                 }
                 if (progress < 49){
                     System.out.println("Failure");

@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -84,6 +85,8 @@ public class readyMap extends FragmentActivity implements OnMapReadyCallback, Ta
         mMap = googleMap;
         mMap.addMarker(place1);
         mMap.addMarker(place2);
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currLat, currLon), 12.0f));
+
     }
 
     private String getUrl(LatLng origin, LatLng dest, String directionMode) {
