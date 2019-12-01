@@ -3,6 +3,7 @@ package com.example.semesterproject;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -27,6 +29,13 @@ public class readyMap extends FragmentActivity implements OnMapReadyCallback, Ta
     private Polyline currentPoly;
     Button getDirection;
     EditText CurrentLoc, destinationLoc;
+    Double CalculatedDistance;
+
+    double currLat;
+    double currLon;
+
+    double destLat;
+    double destLon;
 
 
     @Override
@@ -34,6 +43,14 @@ public class readyMap extends FragmentActivity implements OnMapReadyCallback, Ta
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ready_map);
         getDirection = findViewById(R.id.directionButton);
+
+        Intent intent = getIntent();
+        currLat = intent.getDoubleExtra("currLat", 0);
+        currLon = intent.getDoubleExtra("currLon", 0);
+        destLat = intent.getDoubleExtra("destLat", 0);
+        destLon = intent.getDoubleExtra("destLon", 0);
+
+
         CurrentLoc = (EditText) findViewById(R.id.CurrentText);
         destinationLoc = (EditText) findViewById(R.id.DestinationText);
 
@@ -44,31 +61,31 @@ public class readyMap extends FragmentActivity implements OnMapReadyCallback, Ta
         mapFragment.getMapAsync(this);
 
 
-        place1 = new MarkerOptions().position(new LatLng(43.1609, -85.7100)).title("Location 1");
-        place2 = new MarkerOptions().position(new LatLng(43.1200, -85.5600)).title("Location 2");
+        place1 = new MarkerOptions().position(new LatLng(currLat, currLon)).title("Location 1");
+        place2 = new MarkerOptions().position(new LatLng(destLat, destLon)).title("Location 2");
 
         getDirection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new FetchURL(readyMap.this).execute(getUrl(place1.getPosition(), place2.getPosition(), "driving"), "driving");
                 float results[] = new float[10];
-                Location.distanceBetween(43.1609, -85.7100, 43.1200, -85.5600, results);
+                Location.distanceBetween(currLat, currLon, destLat, destLon, results);
                 System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                 Double distCalc = (results[0] / 1609.344);
                 String str = ("double : " + String.format("%.2f", distCalc));
                 System.out.println(str + " Miles");
 
-
             }
         });
     }
-
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.addMarker(place1);
         mMap.addMarker(place2);
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currLat, currLon), 12.0f));
+
     }
 
     private String getUrl(LatLng origin, LatLng dest, String directionMode) {
