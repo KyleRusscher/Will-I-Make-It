@@ -46,12 +46,6 @@ public class MainActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar gasBar, int progress, boolean fromUser) {
                 ValueText.setText(String.valueOf(progress));
 
-//                double cap = Double.parseDouble(capacity);
-//                double mpgs = Double.parseDouble(mpg);
-//                double totalCap = mpgs * cap;
-//
-//                System.out.println(totalCap);
-
                 if(progress > 50){
                     y.setOnClickListener(e -> {
                         System.out.println("Button was clicked for map");

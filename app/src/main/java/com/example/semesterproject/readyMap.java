@@ -1,11 +1,16 @@
 package com.example.semesterproject;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
+import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
+import android.widget.EditText;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -13,26 +18,32 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 public class readyMap extends FragmentActivity implements OnMapReadyCallback, TaskLoadedCallback {
     private GoogleMap mMap;
     private MarkerOptions place1, place2;
     private Polyline currentPoly;
     Button getDirection;
+    EditText CurrentLoc, destinationLoc;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ready_map);
         getDirection = findViewById(R.id.directionButton);
+        CurrentLoc = (EditText) findViewById(R.id.CurrentText);
+        destinationLoc = (EditText) findViewById(R.id.DestinationText);
+
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        //27.658143,85.3199503
-        //27.667491,85.3208583
+
         place1 = new MarkerOptions().position(new LatLng(43.1609, -85.7100)).title("Location 1");
         place2 = new MarkerOptions().position(new LatLng(43.1200, -85.5600)).title("Location 2");
 
@@ -40,31 +51,19 @@ public class readyMap extends FragmentActivity implements OnMapReadyCallback, Ta
             @Override
             public void onClick(View v) {
                 new FetchURL(readyMap.this).execute(getUrl(place1.getPosition(), place2.getPosition(), "driving"), "driving");
+                float results[] = new float[10];
+                Location.distanceBetween(43.1609, -85.7100, 43.1200, -85.5600, results);
+                System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                Double distCalc = (results[0] / 1609.344);
+                String str = ("double : " + String.format("%.2f", distCalc));
+                System.out.println(str + " Miles");
+
+
             }
         });
-
-//        String url = getUrl(place1.getPosition(), place2.getPosition(), "driving");
-//        new FetchURL(readyMap.this).execute(url, "driving");
-
-
-
-//        D.setOnClickListener(e -> {
-//            System.out.println("Button was clicked for map");
-//            Intent intent = new Intent(readyMap.this, MainActivity.class);
-//            startActivityForResult(intent, selection);
-//        });
-
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -87,6 +86,8 @@ public class readyMap extends FragmentActivity implements OnMapReadyCallback, Ta
         String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + getString(R.string.google_maps_key);
         return url;
     }
+
+
 
 
     @Override
