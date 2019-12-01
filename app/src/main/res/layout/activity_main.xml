@@ -31,7 +31,7 @@
         app:layout_constraintTop_toBottomOf="@+id/seekBar" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/CurrentText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -51,8 +51,8 @@
         android:layout_marginStart="8dp"
         android:text="Enter Destination"
         android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editText2"
-        app:layout_constraintEnd_toStartOf="@+id/editText2"
+        app:layout_constraintBaseline_toBaselineOf="@+id/CurrentText"
+        app:layout_constraintEnd_toStartOf="@+id/CurrentText"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -63,13 +63,13 @@
         android:layout_marginStart="8dp"
         android:text="Current Location"
         android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editText4"
-        app:layout_constraintEnd_toStartOf="@+id/editText4"
+        app:layout_constraintBaseline_toBaselineOf="@+id/DestinationText"
+        app:layout_constraintEnd_toStartOf="@+id/DestinationText"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/DestinationText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -80,10 +80,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintTop_toBottomOf="@+id/CurrentText" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/SubmitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -111,7 +111,7 @@
         android:text="Gas Left in Tank"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        app:layout_constraintTop_toBottomOf="@+id/DestinationText" />
 
     <TextView
         android:id="@+id/carName"
@@ -132,5 +132,27 @@
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/carName" />
+
+    <TextView
+        android:id="@+id/ValueText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="178dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="34dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/selectVehicle"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="422dp"
+        android:layout_height="283dp"
+        android:layout_marginTop="6dp"
+        app:layout_constraintBottom_toTopOf="@+id/SubmitButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/carTrim"
+        app:srcCompat="@drawable/road" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

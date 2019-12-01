@@ -35,6 +35,7 @@ public class TrimSelection extends AppCompatActivity implements ItemFragment.OnL
     String year_selected;
     String make_selected;
     String model_selected;
+    String mpg;
 
     HashMap<String, String> trimToId = new HashMap<>();
 
@@ -72,6 +73,7 @@ public class TrimSelection extends AppCompatActivity implements ItemFragment.OnL
 
     }
 
+
     private void submit(Intent returnToMain, String url){
         OkHttpClient client = new OkHttpClient();
         get(url, client, new Callback() {
@@ -83,15 +85,18 @@ public class TrimSelection extends AppCompatActivity implements ItemFragment.OnL
                     System.out.println(str);
 //                    returnToMain.putExtra("data", str);
                     try {
+
                         JSONArray obj = new JSONArray(str);
                         JSONObject dataOBJ = obj.getJSONObject(0);
+                        String cap = getCapacity(dataOBJ);
                         returnToMain.putExtra("data", str);
                         returnToMain.putExtra("make_id", dataOBJ.getString("model_make_id"));
                         returnToMain.putExtra("name", dataOBJ.getString("model_name"));
                         returnToMain.putExtra("trim", dataOBJ.getString("model_trim"));
                         returnToMain.putExtra("year", dataOBJ.getString("model_year"));
-                        returnToMain.putExtra("mpg", dataOBJ.getString("model_mpg_hwy"));
-                        returnToMain.putExtra("capacity", dataOBJ.getString("model_fuel_cap_g"));
+                        returnToMain.putExtra("mpg", getMpg(dataOBJ));
+                        returnToMain.putExtra("capacity", getCapacity(dataOBJ));
+
                     } catch (JSONException e) {
                         System.out.println(e);
                     }
@@ -107,6 +112,36 @@ public class TrimSelection extends AppCompatActivity implements ItemFragment.OnL
                 e.printStackTrace();
             }
         });
+    }
+
+    private String getCapacity(JSONObject dataOBJ) {
+        String capacity = "10";
+        try {
+            if (!dataOBJ.getString("model_fuel_cap_g").equals("null")) {
+                capacity = dataOBJ.getString("model_fuel_cap_g");
+            } else if (!dataOBJ.getString("model_fuel_cap_l").equals("null")) {
+                capacity = dataOBJ.getString("model_fuel_cap_l");
+            }
+        } catch (JSONException e) {
+            System.out.println(e);
+        }
+        return capacity;
+    }
+
+    private String getMpg(JSONObject dataOBJ) {
+        String mpg = "25";
+        try {
+            if (!dataOBJ.getString("model_mpg_mixed").equals("null")) {
+                mpg = dataOBJ.getString("model_mpg_mixed");
+            } else if (!dataOBJ.getString("model_mpg_hwy").equals("null")) {
+                mpg = dataOBJ.getString("model_mpg_hwy");
+            } else if (!dataOBJ.getString("model_mpg_city").equals("null")) {
+                mpg = dataOBJ.getString("model_mpg_city");
+            }
+        } catch (JSONException e) {
+        System.out.println(e);
+        }
+        return mpg;
     }
 
     private void getTrims(String url){

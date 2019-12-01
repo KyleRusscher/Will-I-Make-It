@@ -19,5 +19,10 @@ public final class UrlConstants {
         return "https://www.carqueryapi.com/api/0.3/?callback=?&cmd=getModel&model=" + model_id;
     }
 
+    public static String get_coordinates(String location){
+//        return "https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyDFPQRVi8iAfiA12WIxWv6Jj8Wt7knoKmM";
+        return "https://maps.googleapis.com/maps/api/geocode/json?address=" + location + "&key=AIzaSyDFPQRVi8iAfiA12WIxWv6Jj8Wt7knoKmM";
+    }
+
 
 }
