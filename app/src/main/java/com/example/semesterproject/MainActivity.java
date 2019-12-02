@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     EditText destination;
 
     public static final int selection = 1;
-    private boolean mLocationPermissionGranted = false;
 
     Double currLat;
     Double currLon;
@@ -60,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button selectVehicle = (Button) findViewById(R.id.selectVehicle);
         Button submit = (Button) findViewById(R.id.SubmitButton);
-        Button mpgButton = (Button) findViewById(R.id.mpgButton);
 
 
         carname = findViewById(R.id.carName);
@@ -112,27 +110,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-//        y.setOnClickListener(e -> {
-//            Double s = Double.valueOf(store);
-//            Double MilePer = Double.valueOf(miles);
-//            Double totalMiles = MilePer * s;
-//            System.out.println(miles);
-//            System.out.println(store);
-//            System.out.println(totalMiles);
-//            Double makeIt = progress * .01;
-//            Double yeet = totalMiles * makeIt;
-//            DecimalFormat df = new DecimalFormat("#.##");
-//            yeet = Double.valueOf(df.format(yeet));
-//            System.out.println(yeet);
-//
-//            System.out.println("Button was clicked for map");
-//            Intent intent = new Intent(MainActivity.this, readyMap.class);
-//            intent.putExtra("currLat", currLat);
-//            intent.putExtra("currLon", currLon);
-//            intent.putExtra("destLat", destLat);
-//            intent.putExtra("destLon", destLon);
-//            startActivityForResult(intent, selection);
-//        });
 
         gasBar = (SeekBar) findViewById(R.id.seekBar);
         ValueText = (TextView) findViewById(R.id.ValueText);
@@ -141,23 +118,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar gasBar, int progress, boolean fromUser) {
                 ValueText.setText(String.valueOf(progress));
-
-//                mpgButton.setOnClickListener(e -> {
-//                    Double s = Double.valueOf(store);
-//                    Double MilePer = Double.valueOf(miles);
-//                    Double totalMiles = MilePer * s;
-//                    System.out.println("Total hwy MPG: " + miles + " mpg");
-//                    System.out.println("Total Amount of fuel that can be stored: " + store + " gallons");
-//                    System.out.println("Total miles with a full tank: " + totalMiles + " miles");
-//                    Double makeIt = progress * .01;
-//                    Double yeet = totalMiles * makeIt;
-//                    DecimalFormat df = new DecimalFormat("#.##");
-//                    yeet = Double.valueOf(df.format(yeet));
-//                    System.out.println("Total Fuel distance: " + yeet + " miles");
-//                });
-
-
-
             }
 
             @Override
@@ -175,12 +135,6 @@ public class MainActivity extends AppCompatActivity {
             Intent yearIntent = new Intent(MainActivity.this, YearSelection.class);
             startActivityForResult(yearIntent, selection);
         });
-
-        //        y.setOnClickListener(e -> {
-//            System.out.println("Button was clicked for map");
-//            Intent intent = new Intent(MainActivity.this, ReadyMap.class);
-//            startActivityForResult(intent, selection);
-//        });
 
     }
 

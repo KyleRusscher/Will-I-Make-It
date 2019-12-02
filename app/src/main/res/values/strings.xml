@@ -7,4 +7,5 @@
     <string name="title_activity_make_selection">MakeSelection</string>
     <string name="title_activity_trim_selection">TrimSelection</string>
     <string name="title_activity_gas_stations">gas_stations</string>
+
 </resources>
