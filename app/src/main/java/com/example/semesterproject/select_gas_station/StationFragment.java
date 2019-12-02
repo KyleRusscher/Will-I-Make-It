@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 
 import com.example.semesterproject.R;
 import com.example.semesterproject.StationItem;
-import com.example.semesterproject.select_gas_station.dummy.DummyContent;
+import com.example.semesterproject.select_gas_station.dummy.GasStationContent;
 
 /**
  * A fragment representing a list of Items.
@@ -70,7 +70,7 @@ public class StationFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            GasStations.adapter = new MystationRecyclerViewAdapter(DummyContent.ITEMS, mListener);
+            GasStations.adapter = new MystationRecyclerViewAdapter(GasStationContent.ITEMS, mListener);
             recyclerView.setAdapter(GasStations.adapter);
         }
         return view;

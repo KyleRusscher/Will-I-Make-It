@@ -26,7 +26,7 @@ public final class UrlConstants {
     public static String get_gas_stations(String lat, String lon, double radius){
         String inMeters = Double.toString(radius * 1609.34);
         return  String.format("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" +
-                "%s,%s&radius=%s&types=gas_station&key=AIzaSyDFPQRVi8iAfiA12WIxWv6Jj8Wt7knoKmM", lat, lon, inMeters);
+                "%s,%s&radius=%s&types=gas_station&key=AIzaSyDFPQRVi8iAfiA12WIxWv6Jj8Wt7knoKmM&rankBy=distance", lat, lon, inMeters);
 
     }
 

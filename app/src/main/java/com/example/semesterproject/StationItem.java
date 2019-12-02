@@ -23,6 +23,6 @@ public class StationItem implements Comparable<StationItem> {
 
     @Override
     public int compareTo(StationItem other) {
-        return this.distance > other.distance ? 0 : 1;
+        return this.distance > other.distance ? 1 : -1;
     }
 }

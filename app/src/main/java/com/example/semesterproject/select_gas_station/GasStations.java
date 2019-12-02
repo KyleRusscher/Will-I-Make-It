@@ -7,11 +7,7 @@ import android.os.Bundle;
 import com.example.semesterproject.StationItem;
 import com.example.semesterproject.UrlConstants;
 import com.example.semesterproject.readyMap;
-import com.example.semesterproject.select_gas_station.dummy.DummyContent;
-import com.example.semesterproject.select_vehicle_files.ItemRecyclerViewAdapter;
-import com.example.semesterproject.select_vehicle_files.MakeSelection;
-import com.example.semesterproject.select_vehicle_files.YearSelection;
-import com.example.semesterproject.select_vehicle_files.dummy.YearContent;
+import com.example.semesterproject.select_gas_station.dummy.GasStationContent;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -29,7 +25,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -130,7 +125,7 @@ public class GasStations extends AppCompatActivity implements StationFragment.On
                 items.add(station);
             }
             Collections.sort(items);
-            DummyContent.addItems(items);
+            GasStationContent.addItems(items);
 
             runOnUiThread(new Runnable() {
 
@@ -156,14 +151,11 @@ public class GasStations extends AppCompatActivity implements StationFragment.On
 
     @Override
     public void onListFragmentInteraction(StationItem item) {
-        DummyContent.clearItems();
-        GasStations.adapter.notifyDataSetChanged();
         Intent intent = new Intent(this, readyMap.class);
         intent.putExtra("currLat", currLat);
         intent.putExtra("currLon", currLon);
         intent.putExtra("destLat", item.lat);
         intent.putExtra("destLon", item.lon);
         startActivity(intent);
-        finish();
     }
 }

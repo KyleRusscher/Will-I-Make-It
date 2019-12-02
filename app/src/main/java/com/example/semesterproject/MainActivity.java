@@ -11,7 +11,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.semesterproject.select_gas_station.GasStations;
-import com.example.semesterproject.select_gas_station.dummy.DummyContent;
+import com.example.semesterproject.select_gas_station.dummy.GasStationContent;
 import com.example.semesterproject.select_vehicle_files.YearSelection;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("destLon", destLon);
                 startActivityForResult(intent, selection);
             } else {
-                DummyContent.clearItems();
+                GasStationContent.clearItems();
                 double percentInTank = gasBar.getProgress() / 100.0;
                 Intent intent = new Intent(MainActivity.this, GasStations.class);
                 intent.putExtra("currLat", currLat);
