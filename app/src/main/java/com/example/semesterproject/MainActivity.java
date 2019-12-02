@@ -220,7 +220,12 @@ public class MainActivity extends AppCompatActivity {
         mpg = intent.getStringExtra("mpg");
         capacity = intent.getStringExtra("capacity");
 
-        carname.setText(String.format("%s %s", year, name));
+        if(year == null){
+            carname.setText("No Vehicle Selected");
+        } else {
+            carname.setText(String.format("%s %s", year, name));
+
+        }
         carTrim.setText(trim);
 
         System.out.println(capacity);
