@@ -40,13 +40,6 @@ public class YearSelection extends AppCompatActivity implements ItemFragment.OnL
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        YearSelection.adapter.notifyDataSetChanged();
-                    }
-                });
                 System.out.println(adapter.getItemCount());
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();

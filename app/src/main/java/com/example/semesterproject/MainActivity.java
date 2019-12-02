@@ -2,25 +2,25 @@ package com.example.semesterproject;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 
+import android.location.Location;
 import android.os.Bundle;
 
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import com.example.semesterproject.select_vehicle_files.TrimSelection;
+
+import com.example.semesterproject.select_gas_station.GasStations;
+import com.example.semesterproject.select_gas_station.dummy.DummyContent;
 import com.example.semesterproject.select_vehicle_files.YearSelection;
-import com.example.semesterproject.select_vehicle_files.dummy.YearContent;
-import com.google.android.gms.maps.model.LatLng;
+import com.google.android.material.snackbar.Snackbar;
 
 
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -38,11 +38,11 @@ public class MainActivity extends AppCompatActivity {
     public static final int selection = 1;
     private boolean mLocationPermissionGranted = false;
 
-    double currLat;
-    double currLon;
+    Double currLat;
+    Double currLon;
 
-    double destLat;
-    double destLon;
+    Double destLat;
+    Double destLon;
 
     String data;
     String make;
@@ -58,9 +58,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button x = (Button) findViewById(R.id.selectVehicle);
-        Button y = (Button) findViewById(R.id.SubmitButton);
-        Button m = (Button) findViewById(R.id.mpgButton);
+        Button selectVehicle = (Button) findViewById(R.id.selectVehicle);
+        Button submit = (Button) findViewById(R.id.SubmitButton);
+        Button mpgButton = (Button) findViewById(R.id.mpgButton);
 
 
         carname = findViewById(R.id.carName);
@@ -69,8 +69,6 @@ public class MainActivity extends AppCompatActivity {
         current = findViewById(R.id.CurrentText);
         destination = findViewById(R.id.DestinationText);
 
-        String store = getIntent().getStringExtra("capacity");
-        String miles = getIntent().getStringExtra("mpg");
 
 
         current.setOnFocusChangeListener((view, hasFocus) -> {
@@ -82,6 +80,36 @@ public class MainActivity extends AppCompatActivity {
             if (!hasFocus) {
                 getCoordinates(destination.getText().toString(), false);
             }
+        });
+
+        submit.setOnClickListener(e -> {
+            System.out.println("Button was clicked for map");
+            if(isVehicleSelected()){
+                Snackbar.make(e, "Please select a vehicle", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            } else if(locationsNotSelected()){
+                Snackbar.make(e, "Not a valid location", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }else if(isWillMakeIt()){
+                Intent intent = new Intent(MainActivity.this, readyMap.class);
+                intent.putExtra("currLat", currLat);
+                intent.putExtra("currLon", currLon);
+                intent.putExtra("destLat", destLat);
+                intent.putExtra("destLon", destLon);
+                startActivityForResult(intent, selection);
+            } else {
+                DummyContent.clearItems();
+                double percentInTank = gasBar.getProgress() / 100.0;
+                Intent intent = new Intent(MainActivity.this, GasStations.class);
+                intent.putExtra("currLat", currLat);
+                intent.putExtra("currLon", currLon);
+                intent.putExtra("destLat", destLat);
+                intent.putExtra("destLon", destLon);
+                intent.putExtra("distance", Double.parseDouble(capacity) * percentInTank * Double.parseDouble(mpg));
+                startActivityForResult(intent, selection);
+//                Double.parseDouble(capacity) * percentInTank * Double.parseDouble(mpg)
+            }
+
         });
 
 
@@ -115,29 +143,21 @@ public class MainActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar gasBar, int progress, boolean fromUser) {
                 ValueText.setText(String.valueOf(progress));
 
-                m.setOnClickListener(e -> {
-                    Double s = Double.valueOf(store);
-                    Double MilePer = Double.valueOf(miles);
-                    Double totalMiles = MilePer * s;
-                    System.out.println("Total hwy MPG: " + miles + " mpg");
-                    System.out.println("Total Amount of fuel that can be stored: " + store + " gallons");
-                    System.out.println("Total miles with a full tank: " + totalMiles + " miles");
-                    Double makeIt = progress * .01;
-                    Double yeet = totalMiles * makeIt;
-                    DecimalFormat df = new DecimalFormat("#.##");
-                    yeet = Double.valueOf(df.format(yeet));
-                    System.out.println("Total Fuel distance: " + yeet + " miles");
-                });
+//                mpgButton.setOnClickListener(e -> {
+//                    Double s = Double.valueOf(store);
+//                    Double MilePer = Double.valueOf(miles);
+//                    Double totalMiles = MilePer * s;
+//                    System.out.println("Total hwy MPG: " + miles + " mpg");
+//                    System.out.println("Total Amount of fuel that can be stored: " + store + " gallons");
+//                    System.out.println("Total miles with a full tank: " + totalMiles + " miles");
+//                    Double makeIt = progress * .01;
+//                    Double yeet = totalMiles * makeIt;
+//                    DecimalFormat df = new DecimalFormat("#.##");
+//                    yeet = Double.valueOf(df.format(yeet));
+//                    System.out.println("Total Fuel distance: " + yeet + " miles");
+//                });
 
-                y.setOnClickListener(e -> {
-                    System.out.println("Button was clicked for map");
-                    Intent intent = new Intent(MainActivity.this, readyMap.class);
-                    intent.putExtra("currLat", currLat);
-                    intent.putExtra("currLon", currLon);
-                    intent.putExtra("destLat", destLat);
-                    intent.putExtra("destLon", destLon);
-                    startActivityForResult(intent, selection);
-                });
+
 
             }
 
@@ -151,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        x.setOnClickListener(e -> {
+        selectVehicle.setOnClickListener(e -> {
             System.out.println("Button was clicked here");
             Intent yearIntent = new Intent(MainActivity.this, YearSelection.class);
             startActivityForResult(yearIntent, selection);
@@ -163,6 +183,23 @@ public class MainActivity extends AppCompatActivity {
 //            startActivityForResult(intent, selection);
 //        });
 
+    }
+
+    private boolean locationsNotSelected() {
+        return (destLon == null || destLat == null || currLat == null || currLon == null);
+    }
+
+    private boolean isWillMakeIt() {
+        float[] results = new float[10];
+        Location.distanceBetween(currLat, currLon, destLat, destLon, results);
+        double distCalc = (results[0] / 1609.344);
+        double percentInTank = gasBar.getProgress() / 100.0;
+        System.out.println(distCalc - Double.parseDouble(capacity) * percentInTank * Double.parseDouble(mpg) < 0);
+        return distCalc - Double.parseDouble(capacity) * percentInTank * Double.parseDouble(mpg) < 0;
+    }
+
+    private boolean isVehicleSelected() {
+        return !(capacity != null && mpg != null && trim != null);
     }
 
 
