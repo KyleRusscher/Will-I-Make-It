@@ -109,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, selection);
 //                Double.parseDouble(capacity) * percentInTank * Double.parseDouble(mpg)
             }
-
         });
 
 

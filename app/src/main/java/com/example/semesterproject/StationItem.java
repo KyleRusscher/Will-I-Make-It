@@ -1,6 +1,8 @@
 package com.example.semesterproject;
 
-public class StationItem {
+import java.util.Comparator;
+
+public class StationItem implements Comparable<StationItem> {
     public final String name;
     public final Double distance;
     public final Double lat;
@@ -16,5 +18,11 @@ public class StationItem {
     @Override
     public String toString() {
         return name;
+    }
+
+
+    @Override
+    public int compareTo(StationItem other) {
+        return this.distance > other.distance ? 0 : 1;
     }
 }

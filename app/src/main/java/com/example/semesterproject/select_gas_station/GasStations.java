@@ -29,6 +29,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import okhttp3.Call;
@@ -127,7 +129,7 @@ public class GasStations extends AppCompatActivity implements StationFragment.On
                 StationItem station = new StationItem(name, lat, lon, startToGas + gasToDestination - totalDistance);
                 items.add(station);
             }
-
+            Collections.sort(items);
             DummyContent.addItems(items);
 
             runOnUiThread(new Runnable() {
