@@ -27,7 +27,11 @@ public final class UrlConstants {
         String inMeters = Double.toString(radius * 1609.34);
         return  String.format("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" +
                 "%s,%s&radius=%s&types=gas_station&key=AIzaSyDFPQRVi8iAfiA12WIxWv6Jj8Wt7knoKmM&rankBy=distance", lat, lon, inMeters);
+    }
 
+    public static String get_directions(double currLat, double currLon, double destLat, double destLon){
+        return "https://maps.googleapis.com/maps/api/directions/json?origin="+ currLat + "," + currLon +
+                "&destination=" + destLat + "," + destLon + "&key=AIzaSyDFPQRVi8iAfiA12WIxWv6Jj8Wt7knoKmM";
     }
 
 

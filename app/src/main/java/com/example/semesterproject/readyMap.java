@@ -1,17 +1,15 @@
 package com.example.semesterproject;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
-import android.location.Location;
+import android.graphics.Path;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
+
+import com.example.semesterproject.dummy.DirectionContent;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -20,8 +18,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 
 public class readyMap extends FragmentActivity implements OnMapReadyCallback, TaskLoadedCallback {
     private GoogleMap mMap;
@@ -63,18 +59,18 @@ public class readyMap extends FragmentActivity implements OnMapReadyCallback, Ta
 
         place1 = new MarkerOptions().position(new LatLng(currLat, currLon)).title("Location 1");
         place2 = new MarkerOptions().position(new LatLng(destLat, destLon)).title("Location 2");
+        new FetchURL(readyMap.this).execute(getUrl(place1.getPosition(), place2.getPosition(), "driving"), "driving");
 
         getDirection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new FetchURL(readyMap.this).execute(getUrl(place1.getPosition(), place2.getPosition(), "driving"), "driving");
-                float results[] = new float[10];
-                Location.distanceBetween(currLat, currLon, destLat, destLon, results);
-                System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                Double distCalc = (results[0] / 1609.344);
-                String str = ("double : " + String.format("%.2f", distCalc));
-                System.out.println(str + " Miles");
-
+                DirectionContent.clearItems();
+                Intent intent = new Intent(readyMap.this, Directions.class);
+                intent.putExtra("currLat", currLat);
+                intent.putExtra("currLon", currLon);
+                intent.putExtra("destLat", destLat);
+                intent.putExtra("destLon", destLon);
+                startActivity(intent);
             }
         });
     }
@@ -113,4 +109,6 @@ public class readyMap extends FragmentActivity implements OnMapReadyCallback, Ta
             currentPoly.remove();
         currentPoly = mMap.addPolyline((PolylineOptions) values[0]);
     }
+
 }
+
